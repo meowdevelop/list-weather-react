@@ -1,22 +1,6 @@
 const initialState = {
-    cities:  [
-      {
-        city: 'Samara',
-        temp: '+25',
-        press: '11'
-      },
-      {
-        city: 'Moscow',
-        temp: '+25',
-        press: '11'
-      },
-      {
-        city: 'Piter',
-        temp: '+25',
-        press: '11'
-      },
-    
-    ],
+    cities:  [],
+    cache: []
   };
   
   const weather = (state = initialState, { type, payload }) => {
@@ -30,6 +14,11 @@ const initialState = {
         return {
           ...state,
           cities: payload
+        };
+      case 'ADD_IN_CACHE':
+        return {
+          ...state,
+          cache: payload
         };
       
   

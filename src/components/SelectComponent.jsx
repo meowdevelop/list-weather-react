@@ -1,16 +1,17 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-
 // Components
 import AddingButton from './AddingButton';
+import SelectForm from './SelectForm';
 
 class SelectComponent extends React.Component {
 
   state = {
     selectedCity: 'Samara',
     isFetching: true, 
-    error: null
+    error: null,
+    result: null
   };
 
   onCityChange = event =>
@@ -18,28 +19,50 @@ class SelectComponent extends React.Component {
       selectedCity: event.target.value
     });
 
-   
-  
   pushNewCity = (result, city) => {
-    console.log('ghbdtn');
-    const { cities } = this.props.store.weather;
-    cities.push ({
-        city: city,
-        temp: `${result.main.temp}`,
-        press: `${result.main.pressure}`
-    });
+    const { cities, cache } = this.props.store.weather;
+    const addedCity = {
+      city: city,
+      temp: `${Math.round(result.main.temp)} °C`,
+      press: `${result.main.pressure} мм.рт.ст.`
+  }
+    cities.push (addedCity);
+    cache.push (addedCity);
   
     this.props.updateState('ADD_NEW_CITY', cities);
+    this.props.updateState('ADD_IN_CACHE', cache);
+    console.log(cache);
   
+  }
+
+  checkCities = (city, arrayCities) => {
+    let searchedCity = null;
+    arrayCities.forEach(item => {
+      if(item.city === city) {
+        searchedCity = item;
+      }
+    });
+    return searchedCity;
   }
   
   getWeather = (city) => {
+    const { cities, cache } = this.props.store.weather;
+    const addedCity = this.checkCities(city, cities);
+    const cacheCity = this.checkCities(city, cache);
+    if(addedCity) {
+      return;
+    }
+    if(cacheCity) {
+      cities.push(cacheCity);
+      this.props.updateState('ADD_NEW_CITY', cities);
+      return;
+    }
     this.setState({...this.state, isFetching: true})
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=1a41c172ff507739c60bfc6560e8337b`)
+    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=1a41c172ff507739c60bfc6560e8337b&units=metric`)
       .then(response => response.json())
       .then(result => {
+        this.setState({...this.state, isFetching: false, result: result});
         this.pushNewCity(result, city);
-        this.setState({...this.state, isFetching: false});
       })
       .catch(e => {
         console.log(e);
@@ -50,14 +73,9 @@ class SelectComponent extends React.Component {
   render() {
       
     return <div className="select-line">
-      <div className='select-wrap'>
-        <select value={this.state.selectedCity} className='select' onChange={this.onCityChange}>
-          <option value='Samara'>Самара</option>
-          <option value='Moscow'>Москва</option>
-          <option value='Kazan'>Казань</option>
-        </select>
-      </div>
-      <AddingButton city = {this.state.selectedCity} onClick = {this.getWeather}/>
+      <SelectForm value={this.state.selectedCity} onChange={this.onCityChange}/>
+      <AddingButton onClick = {() => this.getWeather(this.state.selectedCity)}/>
+       {this.state.error ? (<p>{this.state.result.message}</p>) : null}
      </div>
   }
 }

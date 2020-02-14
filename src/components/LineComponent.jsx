@@ -5,11 +5,14 @@ import { connect } from 'react-redux';
 
 
 // Components
-import DeleteComponent from './DeleteComponent';
+import DeleteButton from './DeleteButton';
 
 
 class LineComponent extends React.Component {
 
+  deleteCity = (city) => {
+    this.props.updateState('SET_DELETE_CITY', city);
+  }
 
   render() {
       
@@ -17,7 +20,7 @@ class LineComponent extends React.Component {
         <div className='line__city line__item'>{this.props.data.city}</div>
         <div className='line__temp line__item'>{this.props.data.temp}</div>
         <div className='line__press line__item'>{this.props.data.press}</div>
-        <DeleteComponent city={this.props.data.city}/>
+        <DeleteButton onClick={() => this.deleteCity(this.props.data.city)}/>
     </div>
   }
 }

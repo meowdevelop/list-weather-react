@@ -1,9 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-//styles
-
-
 // Components
 import TableComponent from '../components/TableComponent';
 import SelectComponent from '../components/SelectComponent';
@@ -13,10 +10,12 @@ class WeatherComponent extends React.Component {
 
   render() {
 
-    return <section className="weather-wrapper">
-          <SelectComponent/>
-          <TableComponent/>
-      </section>
+    return <main className="main">
+         <section className="weather-wrapper">
+            <SelectComponent/>
+            <TableComponent/>
+          </section>
+      </main>
      
   }
 }

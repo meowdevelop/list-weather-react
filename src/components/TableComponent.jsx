@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-
 // Components
 import LineComponent from './LineComponent';
-
 
 class TableComponent extends React.Component {
 
@@ -18,6 +16,7 @@ class TableComponent extends React.Component {
             <div className="table__header">Temp</div>
             <div className="table__header">Press</div>
         </div>
+        {cities.length === 0 ? (<p className="table__comment">Добавьте город</p>) : null}
         {cities.map((city) =>
         <LineComponent data={city} />
       )} 

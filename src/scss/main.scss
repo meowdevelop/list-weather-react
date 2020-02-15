@@ -1,11 +1,9 @@
 @import
-  'helpers/vars',
   'helpers/mixins';
 
 @import
 	'ui/buttons',
-	'ui/select',
-  'ui/typography';
+	'ui/select';
 
 @import
 	'base/font-face',
@@ -13,7 +11,7 @@
 	'base/general';
   
 @import
-	'blocks/day';
+	'blocks/weather';
 	
 
 

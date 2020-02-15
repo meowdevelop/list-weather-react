@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-//styles
-
 
 // Components
 import DeleteButton from './DeleteButton';

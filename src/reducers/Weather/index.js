@@ -1,6 +1,6 @@
 const initialState = {
     cities:  [],
-    cache: []
+    cache: [],
   };
   
   const weather = (state = initialState, { type, payload }) => {
@@ -21,7 +21,6 @@ const initialState = {
           cache: payload
         };
       
-  
       default:
         return state;
     }

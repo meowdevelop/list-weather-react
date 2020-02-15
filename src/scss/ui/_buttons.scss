@@ -6,8 +6,8 @@
     border-left: none;
 
     &:hover {
-        background-color: orangered;
-        border: 1px solid orangered;
+        background-color: $c-orange;
+        border: 1px solid $c-orange;
     }
 }
 
@@ -16,6 +16,6 @@
     text-align: center;
     font-size: 1rem;
     &:hover {
-        background-color: orangered;
+        background-color: $c-orange;
     }
 }

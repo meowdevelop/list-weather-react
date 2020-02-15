@@ -42,18 +42,18 @@
 .table {
     width: 100%;
     height: auto;
-    border: 1px solid orangered;
+    border: 1px solid $c-orange;
     border-radius: 3px;
 
     &__headers {
         display: flex;
         width: 100%;
-        border-bottom: 1px solid orangered;
+        border-bottom: 1px solid $c-orange;
     }
 
     &__header {
         width: 30%;
-        border-right: 1px solid orangered;
+        border-right: 1px solid $c-orange;
         text-align: center;
         padding: 15px;
         position: relative;
@@ -86,7 +86,7 @@
     }
 
     &__comment {
-        color: orangered;
+        color: $c-orange;
         padding: 20px 30px;
         text-align: center;
     }
@@ -97,12 +97,12 @@
     width: 100%;
 
     &:not(:last-child) {
-        border-bottom: 1px solid orangered;
+        border-bottom: 1px solid $c-orange;
     }
 
     &__item:not(:last-child) {
         width: 30%;
-        border-right: 1px solid orangered;
+        border-right: 1px solid $c-orange;
         text-align: center;
         padding: 15px;
     }
